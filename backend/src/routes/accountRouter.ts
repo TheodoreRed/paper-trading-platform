@@ -30,7 +30,7 @@ accountRouter.get("/:uuid", async (req, res) => {
   }
 });
 
-// Create a new account with the provided account
+// Create a new account in mongodb with the provided account object
 accountRouter.post("/", async (req, res) => {
   const account: Account = req.body;
 
