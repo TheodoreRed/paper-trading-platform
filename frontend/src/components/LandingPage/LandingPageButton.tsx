@@ -1,7 +1,6 @@
 interface Props {
   textContent: string;
   isDisabled?: boolean;
-  handleClick?: (a?: any) => any;
 }
 
 const LandingPageButton = ({ textContent, isDisabled }: Props) => {

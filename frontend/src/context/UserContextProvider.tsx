@@ -1,27 +1,25 @@
 import { ReactNode, useEffect, useState } from "react";
 import UserContext from "./UserContext";
 import { Account } from "../models/account-types";
-import { useNavigate } from "react-router-dom";
+import { getEncryptedDataFromLocalStorage } from "../utils/localStorageUtils";
+import { getAccountByUuid } from "../services/accountApi";
 
 function UserProvider({ children }: { children: ReactNode }) {
   const [account, setAccount] = useState<Account | null>(null);
-  const navigate = useNavigate();
 
   useEffect(() => {
-    const storedAccount = localStorage.getItem("account");
-    if (storedAccount) {
-      setAccount(JSON.parse(storedAccount));
+    const storedUuid = getEncryptedDataFromLocalStorage();
+    if (storedUuid) {
+      getAccountByUuid(storedUuid).then((res) => {
+        if (res) {
+          setAccount(res);
+        }
+      });
     }
   }, []);
 
-  const handleLogout = () => {
-    setAccount(null);
-    localStorage.removeItem("account");
-    navigate("/");
-  };
-
   return (
-    <UserContext.Provider value={{ account, setAccount, handleLogout }}>
+    <UserContext.Provider value={{ account, setAccount }}>
       {children}
     </UserContext.Provider>
   );

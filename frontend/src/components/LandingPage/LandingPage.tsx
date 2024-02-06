@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import LandingPageButton from "./LandingPageButton";
 
-const LandingPage: React.FC = () => {
+const LandingPage = () => {
   return (
     <div className="flex flex-col items-center h-screen gap-48 p-10">
       <h1 className="relative text-5xl font-extrabold md:text-8xl left-3">

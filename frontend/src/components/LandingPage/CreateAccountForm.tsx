@@ -1,14 +1,15 @@
-import { FormEvent, useContext, useState } from "react";
+import { FormEvent, useState } from "react";
 import LandingPageButton from "./LandingPageButton";
 import { createNewAccount } from "../../services/accountApi";
 import { Account } from "../../models/account-types";
 import { v4 as uuidv4 } from "uuid";
-import UserContext from "../../context/UserContext";
 import { useNavigate } from "react-router-dom";
+import { useUser } from "../../hooks/useUser";
+import { saveEncryptedDataToLocalStorage } from "../../utils/localStorageUtils";
 
-const LandingNew = () => {
+const CreateAccountForm = () => {
   const [portfolioNickname, setPortfolioNickname] = useState("");
-  const { setAccount } = useContext(UserContext);
+  const { setAccount } = useUser();
   const navigate = useNavigate();
 
   const isFormInvalid = portfolioNickname === "";
@@ -30,7 +31,7 @@ const LandingNew = () => {
     };
     const createdAccount = await createNewAccount(newAccount);
     if (createdAccount) {
-      localStorage.setItem("account", JSON.stringify(createdAccount));
+      saveEncryptedDataToLocalStorage(createdAccount.uuid);
       setAccount(createdAccount);
       navigate("/dashboard");
     }
@@ -72,4 +73,4 @@ const LandingNew = () => {
   );
 };
 
-export default LandingNew;
+export default CreateAccountForm;
