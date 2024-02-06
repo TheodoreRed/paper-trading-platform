@@ -1,7 +1,20 @@
 import { Link } from "react-router-dom";
 import LandingPageButton from "./LandingPageButton";
+import { getHistoricalStockData } from "../../services/stockDataApi";
 
 const LandingPage = () => {
+  getHistoricalStockData("AAPL", "2020-01-01", "2020-12-31", "month")
+    .then((data) => {
+      if (data) {
+        console.log("Historical Stock Data:", data);
+      } else {
+        console.log("No data found");
+      }
+    })
+    .catch((error) => {
+      console.error("Error fetching historical stock data:", error);
+    });
+
   return (
     <div className="flex flex-col items-center h-screen gap-48 p-10">
       <h1 className="relative text-5xl font-extrabold md:text-8xl left-3">
