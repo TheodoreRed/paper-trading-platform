@@ -1,22 +1,16 @@
-import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { useEffect } from "react";
 import { getEncryptedDataFromLocalStorage } from "../../utils/localStorageUtils";
 import { getAccountByUuid } from "../../services/accountApi";
 import { useUser } from "../../hooks/useUser";
-import { getRealTimeStockPrice } from "../../services/finnhubApi";
-import { StockPrice } from "../../models/StockPrice";
+import BottomNavigation from "./BottomNavigation";
+import ErrorPage from "../Common/ErrorPage";
+import Home from "./Home";
+import { ActiveTab } from "../../context/UserContextProvider";
+import Settings from "./Settings";
+import SearchStocks from "./SearchStocks";
 
-const Dashboard = () => {
-  const { account, setAccount } = useUser();
-  const [stockData, setStockData] = useState<StockPrice | null>(null);
-
-  useEffect(function () {
-    getRealTimeStockPrice("CLF").then((res) => {
-      if (res) {
-        setStockData(res);
-      }
-    });
-  }, []);
+const Dashboard: React.FC = () => {
+  const { account, setAccount, activeTab } = useUser();
 
   useEffect(() => {
     let activeAccount = account;
@@ -33,21 +27,27 @@ const Dashboard = () => {
   }, [account]);
 
   if (!account) {
-    return (
-      <p>
-        Loading... or you need make an account{" "}
-        <Link to="/new" className="text-customRed hover:text-red-400">
-          Here
-        </Link>
-      </p>
-    );
+    return <ErrorPage />;
   }
+
+  const getActiveDashboardComponent = (active: ActiveTab) => {
+    switch (active) {
+      case "home":
+        return <Home />;
+      case "settings":
+        return <Settings />;
+      case "search":
+        return <SearchStocks />;
+
+      default:
+        return <ErrorPage />;
+    }
+  };
 
   return (
     <div>
-      Hello, User
-      <p>{account?.uuid}</p>
-      <p>{JSON.stringify(stockData)}</p>
+      {getActiveDashboardComponent(activeTab)}
+      <BottomNavigation />
     </div>
   );
 };

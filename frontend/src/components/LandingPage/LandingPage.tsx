@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import LandingPageButton from "./LandingPageButton";
 import { getHistoricalStockData } from "../../services/stockDataApi";
 
-const LandingPage = () => {
+const LandingPage: React.FC = () => {
   getHistoricalStockData("AAPL", "2020-01-01", "2020-12-31", "month")
     .then((data) => {
       if (data) {
@@ -16,7 +16,7 @@ const LandingPage = () => {
     });
 
   return (
-    <div className="flex flex-col items-center h-screen gap-48 p-10">
+    <div className="flex flex-col items-center h-screen gap-40 p-10 mb-12">
       <h1 className="relative text-5xl font-extrabold md:text-8xl left-3">
         Paper
         <span className="text-customRed relative top-[2.5rem] right-[2.25rem] md:top-[4.5rem] md:right-[3.25rem]">

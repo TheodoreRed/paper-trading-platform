@@ -3,7 +3,7 @@ interface Props {
   isDisabled?: boolean;
 }
 
-const LandingPageButton = ({ textContent, isDisabled }: Props) => {
+const LandingPageButton: React.FC<Props> = ({ textContent, isDisabled }) => {
   return (
     <button
       disabled={isDisabled}

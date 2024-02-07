@@ -4,8 +4,11 @@ import { Account } from "../models/account-types";
 import { getEncryptedDataFromLocalStorage } from "../utils/localStorageUtils";
 import { getAccountByUuid } from "../services/accountApi";
 
+export type ActiveTab = "home" | "settings" | "search";
+
 function UserProvider({ children }: { children: ReactNode }) {
   const [account, setAccount] = useState<Account | null>(null);
+  const [activeTab, setActiveTab] = useState<ActiveTab>("home");
 
   useEffect(() => {
     const storedUuid = getEncryptedDataFromLocalStorage();
@@ -19,7 +22,9 @@ function UserProvider({ children }: { children: ReactNode }) {
   }, []);
 
   return (
-    <UserContext.Provider value={{ account, setAccount }}>
+    <UserContext.Provider
+      value={{ account, setAccount, activeTab, setActiveTab }}
+    >
       {children}
     </UserContext.Provider>
   );
