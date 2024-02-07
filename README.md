@@ -22,11 +22,11 @@ Ensure you have Node.js and npm installed on your system. Then, follow these ste
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/TheodoreRed/paper-trading-simulator.git
+   git clone https://github.com/TheodoreRed/paper-trading-platform.git
    ```
 2. Navigate into the project directory:
    ```bash
-   cd paper-trading-simulator
+   cd paper-trading-platform
    ```
 3. Install dependencies for both frontend and backend:
    ```bash
