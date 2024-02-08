@@ -19,13 +19,13 @@ const BottomNavigation: React.FC = () => {
   const { activeTab, setActiveTab } = useUser();
 
   const tabs: Tab[] = [
-    { id: "settings", icon: faGears, size: "1/4", iconSize: "text-2xl" },
-    { id: "home", icon: faHouse, size: "2/4", iconSize: "text-3xl" },
-    { id: "search", icon: faMG, size: "1/4", iconSize: "text-2xl" },
+    { id: "settings", icon: faGears, size: "w-1/4", iconSize: "text-2xl" },
+    { id: "home", icon: faHouse, size: "w-1/2", iconSize: "text-3xl" },
+    { id: "search", icon: faMG, size: "w-1/4", iconSize: "text-2xl" },
   ];
 
   const getButtonStyles = (tab: Tab): string =>
-    `flex items-center justify-center w-${tab.size} p-5 border ${activeTab === tab.id ? "border-black bg-white" : "border-white"}`;
+    `flex items-center justify-center ${tab.size} p-5 border ${activeTab === tab.id ? "border-black bg-white" : "border-white"}`;
 
   const getIconStyles = (tab: Tab): string =>
     `${tab.iconSize} ${activeTab === tab.id ? "text-black" : "text-white"}`;

@@ -3,10 +3,10 @@ import LandingPageButton from "./LandingPageButton";
 import { getHistoricalStockData } from "../../services/stockDataApi";
 
 const LandingPage: React.FC = () => {
-  getHistoricalStockData("AAPL", "2020-01-01", "2020-12-31", "month")
+  getHistoricalStockData("AAPL", "2023-08-01", "2023-12-31", "week")
     .then((data) => {
       if (data) {
-        console.log("Historical Stock Data:", data);
+        console.log("Historical Stock Data:", data[0], data[1]);
       } else {
         console.log("No data found");
       }

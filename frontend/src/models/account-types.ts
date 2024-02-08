@@ -17,6 +17,7 @@ interface Portfolio {
   balance: number;
   assetGroups: AssetGroup[];
   history: PortfolioHistory[];
+  active: boolean;
 }
 
 interface PortfolioHistory {
